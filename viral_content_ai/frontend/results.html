@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Viral AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background: #FFFFFF; }
+        
+        /* Page Transition */
+        .page-content {
+            animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes pageEnter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .clip-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .clip-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .content-item {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-item:hover {
+            background: #F5F5F7;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1D1D1F;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <div class="page-content">
+    
+    <!-- Navigation -->
+    <nav class="border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-semibold text-[#1D1D1F]">Viral AI</a>
+            <a href="upload.html" class="text-sm text-[#6E6E73] hover:text-[#1D1D1F] transition-colors">
+                New Upload
+            </a>
+        </div>
+    </nav>
+    
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        
+        <!-- Header -->
+        <div class="mb-16">
+            <h1 class="text-5xl font-semibold tracking-tight text-[#1D1D1F] mb-3" style="line-height: 1.1; letter-spacing: -0.02em;">
+                Your Content is Ready
+            </h1>
+            <p class="text-lg text-[#6E6E73]">
+                12 clips, thumbnails, and optimized content generated
+            </p>
+        </div>
+
+        <!-- Clips Section -->
+        <div class="mb-20">
+            <h2 class="text-2xl font-semibold text-[#1D1D1F] mb-8">Viral Clips</h2>
+            <div id="clipsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Clips will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="bg-[#F5F5F7] rounded-2xl p-12">
+            <h2 class="text-2xl font-semibold text-[#1D1D1F] mb-8">Generated Content</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="bg-white p-1 rounded-full inline-flex mb-10 shadow-sm">
+                <button onclick="switchTab('titles')" 
+                        id="tab-titles"
+                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 bg-[#0066FF] text-white">
+                    Titles
+                </button>
+                <button onclick="switchTab('descriptions')" 
+                        id="tab-descriptions"
+                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
+                    Descriptions
+                </button>
+                <button onclick="switchTab('hashtags')" 
+                        id="tab-hashtags"
+                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
+                    Hashtags
+                </button>
+                <button onclick="switchTab('voiceover')" 
+                        id="tab-voiceover"
+                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
+                    Voiceover
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="content-titles" class="tab-content">
+                <div id="titlesContainer" class="space-y-3 max-w-3xl">
+                    <!-- Titles will be inserted here -->
+                </div>
+            </div>
+
+            <div id="content-descriptions" class="tab-content hidden">
+                <div id="descriptionsContainer" class="space-y-3 max-w-3xl">
+                    <!-- Descriptions will be inserted here -->
+                </div>
+            </div>
+
+            <div id="content-hashtags" class="tab-content hidden">
+                <div id="hashtagsContainer" class="flex flex-wrap gap-2 max-w-3xl">
+                    <!-- Hashtags will be inserted here -->
+                </div>
+            </div>
+
+            <div id="content-voiceover" class="tab-content hidden">
+                <div id="voiceoverContainer" class="max-w-3xl">
+                    <!-- Voiceover player will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Copied to clipboard</div>
+    
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/results.js"></script>
+</body>
+</html>
