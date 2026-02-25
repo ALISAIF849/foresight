@@ -3,18 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viral AI</title>
+    <title>Casकैड - AI Content Multiplier</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bento-showcase.css">
 </head>
 <body>
     
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
-        <div class="toggle-circle"></div>
+    <!-- Theme Selector -->
+    <div class="theme-toggle">
+        <div class="theme-selector">
+            <button class="theme-button" id="themeButton">
+                🎨
+            </button>
+            <div class="theme-menu" id="themeMenu">
+                <div class="theme-option active" data-theme="light">
+                    <span class="emoji">☀️</span>
+                    <span>Light</span>
+                </div>
+                <div class="theme-option" data-theme="dark">
+                    <span class="emoji">🌙</span>
+                    <span>Dark</span>
+                </div>
+                <div class="theme-option" data-theme="reeler">
+                    <span class="emoji">📸</span>
+                    <span>Reeler</span>
+                </div>
+                <div class="theme-option" data-theme="romantic">
+                    <span class="emoji">💕</span>
+                    <span>Romantic</span>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Opening Animation - Netflix Style -->
@@ -77,6 +100,90 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Bento Showcase Section -->
+        <section class="bento-showcase bg-primary">
+            <div class="bento-grid reveal">
+                
+                <!-- Large Video Card -->
+                <div class="bento-card bento-video">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&modestbranding=1"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen>
+                        </iframe>
+                        <div class="video-overlay">
+                            <h3>See It In Action</h3>
+                            <p>Watch how creators transform their content in minutes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Creator Image Card -->
+                <div class="bento-card bento-creator">
+                    <div class="creator-content">
+                        <div class="creator-icon">👨‍💻</div>
+                        <h3>Built for Creators</h3>
+                        <p>Join thousands of content creators scaling their reach</p>
+                    </div>
+                </div>
+                
+                <!-- Analytics Dashboard Card -->
+                <div class="bento-card bento-analytics">
+                    <div class="analytics-header">
+                        <span class="analytics-icon">📊</span>
+                        <h3>Real-Time Analytics</h3>
+                    </div>
+                    <div class="analytics-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">12x</div>
+                            <div class="stat-label">Content Output</div>
+                            <span class="stat-trend">↑ 240%</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Time Saved</div>
+                            <span class="stat-trend">↑ 180%</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3.2M</div>
+                            <div class="stat-label">Total Reach</div>
+                            <span class="stat-trend">↑ 320%</span>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">94%</div>
+                            <div class="stat-label">Engagement</div>
+                            <span class="stat-trend">↑ 156%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media Preview Card -->
+                <div class="bento-card bento-social">
+                    <div class="social-header">
+                        <span class="social-icon">📱</span>
+                        <h3>Multi-Platform Ready</h3>
+                    </div>
+                    <div class="social-preview">
+                        <div class="social-item">
+                            <div class="social-platform">📸</div>
+                            <div class="social-name">Instagram</div>
+                        </div>
+                        <div class="social-item">
+                            <div class="social-platform">🎵</div>
+                            <div class="social-name">TikTok</div>
+                        </div>
+                        <div class="social-item">
+                            <div class="social-platform">▶️</div>
+                            <div class="social-name">YouTube</div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </section>
 
@@ -207,13 +314,51 @@
             }, 2200);
         });
         
-        // Theme toggle
-        const toggle = document.getElementById("themeToggle");
+        // Theme selector
+        const themeButton = document.getElementById("themeButton");
+        const themeMenu = document.getElementById("themeMenu");
+        const themeOptions = document.querySelectorAll(".theme-option");
         
-        toggle.addEventListener("click", () => {
-            document.documentElement.classList.toggle("dark");
-            toggle.classList.toggle("active");
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.className = savedTheme;
+        updateActiveTheme(savedTheme);
+        
+        themeButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            themeMenu.classList.toggle("show");
         });
+        
+        // Close menu when clicking outside
+        document.addEventListener("click", () => {
+            themeMenu.classList.remove("show");
+        });
+        
+        themeOptions.forEach(option => {
+            option.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const theme = option.dataset.theme;
+                document.documentElement.className = theme;
+                localStorage.setItem('theme', theme);
+                updateActiveTheme(theme);
+                themeMenu.classList.remove("show");
+            });
+        });
+        
+        function updateActiveTheme(theme) {
+            themeOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.theme === theme);
+            });
+            
+            // Update button emoji
+            const emojis = {
+                light: '☀️',
+                dark: '🌙',
+                reeler: '📸',
+                romantic: '💕'
+            };
+            themeButton.textContent = emojis[theme] || '🎨';
+        }
         
         // Wrap words in spans for interactive hover
         function wrapWordsInSpans() {

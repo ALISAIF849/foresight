@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload - Viral AI</title>
+    <title>Upload - Casकैड</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
         body { background: #FFFFFF; }
@@ -251,12 +251,41 @@
 </head>
 <body class="antialiased">
     
+    <!-- Theme Selector -->
+    <div class="theme-toggle">
+        <div class="theme-selector">
+            <button class="theme-button" id="themeButton">
+                🎨
+            </button>
+            <div class="theme-menu" id="themeMenu">
+                <div class="theme-option active" data-theme="light">
+                    <span class="emoji">☀️</span>
+                    <span>Light</span>
+                </div>
+                <div class="theme-option" data-theme="dark">
+                    <span class="emoji">🌙</span>
+                    <span>Dark</span>
+                </div>
+                <div class="theme-option" data-theme="reeler">
+                    <span class="emoji">📸</span>
+                    <span>Reeler</span>
+                </div>
+                <div class="theme-option" data-theme="romantic">
+                    <span class="emoji">💕</span>
+                    <span>Romantic</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="page-content">
     
     <!-- Navigation -->
     <nav class="border-b border-gray-100">
         <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-xl font-semibold text-[#1D1D1F]">Viral AI</a>
+            <a href="index.html" class="text-xl font-semibold text-[#1D1D1F]">
+                Cas<span style="font-family: 'Noto Sans Devanagari', sans-serif;">कैड</span>
+            </a>
             <a href="index.html" class="text-sm text-[#6E6E73] hover:text-[#1D1D1F] transition-colors">
                 ← Back
             </a>
@@ -393,5 +422,52 @@
 
     <script src="js/api.js"></script>
     <script src="js/upload.js"></script>
+    <script>
+        // Theme selector
+        const themeButton = document.getElementById("themeButton");
+        const themeMenu = document.getElementById("themeMenu");
+        const themeOptions = document.querySelectorAll(".theme-option");
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.className = savedTheme;
+        document.body.style.background = 'var(--bg-primary)';
+        updateActiveTheme(savedTheme);
+        
+        themeButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            themeMenu.classList.toggle("show");
+        });
+        
+        document.addEventListener("click", () => {
+            themeMenu.classList.remove("show");
+        });
+        
+        themeOptions.forEach(option => {
+            option.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const theme = option.dataset.theme;
+                document.documentElement.className = theme;
+                document.body.style.background = 'var(--bg-primary)';
+                localStorage.setItem('theme', theme);
+                updateActiveTheme(theme);
+                themeMenu.classList.remove("show");
+            });
+        });
+        
+        function updateActiveTheme(theme) {
+            themeOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.theme === theme);
+            });
+            
+            const emojis = {
+                light: '☀️',
+                dark: '🌙',
+                reeler: '📸',
+                romantic: '💕'
+            };
+            themeButton.textContent = emojis[theme] || '🎨';
+        }
+    </script>
 </body>
 </html>

@@ -9,6 +9,7 @@
     --accent: #0071E3;
 }
 
+/* Dark Mode */
 :root.dark {
     --bg-primary: #0A0A0C;
     --bg-secondary: #121214;
@@ -16,7 +17,55 @@
     --text-secondary: #98989D;
     --border: rgba(255, 255, 255, 0.08);
     --shadow: rgba(0, 0, 0, 0.6);
-    --accent: #FFFFFF;
+    --accent: #0A84FF;
+}
+
+/* Reeler Mode (Instagram Vibes) */
+:root.reeler {
+    --bg-primary: #FAFAFA;
+    --bg-secondary: #FFFFFF;
+    --text-primary: #262626;
+    --text-secondary: #8E8E8E;
+    --border: rgba(0, 0, 0, 0.1);
+    --shadow: rgba(0, 0, 0, 0.1);
+    --accent: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+}
+
+:root.reeler .btn-primary {
+    background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+    box-shadow: 0 4px 16px rgba(245, 133, 41, 0.3);
+}
+
+:root.reeler .viral-score {
+    background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF);
+}
+
+/* Romantic Mode */
+:root.romantic {
+    --bg-primary: #FFF5F7;
+    --bg-secondary: #FFFFFF;
+    --text-primary: #2D1B2E;
+    --text-secondary: #8B6F8C;
+    --border: rgba(219, 112, 147, 0.15);
+    --shadow: rgba(219, 112, 147, 0.2);
+    --accent: #E91E63;
+}
+
+:root.romantic .btn-primary {
+    background: linear-gradient(135deg, #E91E63, #F06292);
+    box-shadow: 0 4px 16px rgba(233, 30, 99, 0.3);
+}
+
+:root.romantic .viral-score {
+    background: linear-gradient(135deg, #E91E63, #F06292);
+}
+
+:root.romantic .card {
+    border-color: rgba(233, 30, 99, 0.1);
+}
+
+:root.romantic body {
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 100%);
 }
 
 * { 
@@ -66,14 +115,77 @@ section {
     position: fixed;
     top: 24px;
     right: 24px;
-    width: 56px;
-    height: 30px;
-    border-radius: 20px;
+    z-index: 1000;
+}
+
+.theme-selector {
+    position: relative;
+}
+
+.theme-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     transition: all 0.3s ease;
-    z-index: 1000;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.theme-button:hover {
+    transform: scale(1.1);
+}
+
+.theme-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.5rem;
+    min-width: 180px;
+    box-shadow: 0 8px 32px var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-menu.show {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.theme-option:hover {
+    background: var(--bg-primary);
+}
+
+.theme-option.active {
+    background: rgba(0, 102, 255, 0.1);
+}
+
+.theme-option .emoji {
+    font-size: 1.25rem;
 }
 
 .toggle-circle {
@@ -744,4 +856,92 @@ video::-webkit-media-controls-panel {
 .page-content {
     min-height: 100vh;
     width: 100%;
+}
+
+
+/* Engagement Score Animations */
+#engagementScore {
+    animation: scoreReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes scoreReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Heatmap Container */
+#heatmapContainer {
+    position: relative;
+    cursor: crosshair;
+}
+
+/* Language Selector */
+#languageSelector {
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+#languageSelector:hover {
+    opacity: 0.8;
+}
+
+/* Platform Optimization Cards */
+.card .space-y-3 > div {
+    transition: all 0.3s ease;
+}
+
+.card .space-y-3 > div:hover {
+    transform: translateX(4px);
+}
+
+/* Trending Hashtag Pills */
+.hashtag-pill {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hashtag-pill:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px var(--shadow);
+}
+
+/* Engagement Metrics */
+.metric-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Progress Bars Animation */
+.card .h-2 > div {
+    animation: progressFill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform-origin: left;
+}
+
+@keyframes progressFill {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #engagementScore {
+        font-size: 3rem;
+    }
+    
+    #reachEstimate {
+        font-size: 2.5rem;
+    }
 }
