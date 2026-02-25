@@ -45,6 +45,24 @@
             </div>
         </div>
 
+        <!-- Blog Post -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">📝 Blog Post</h2>
+            <div class="card bg-secondary border-color shadow-custom p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-primary">SEO-Optimized Article</h3>
+                    <button onclick="copyToClipboard(document.getElementById('blogPost').textContent)" class="btn-primary">
+                        📋 Copy Article
+                    </button>
+                </div>
+                <div class="bg-primary rounded-xl p-6 max-h-96 overflow-y-auto">
+                    <div id="blogPost" class="text-primary leading-relaxed space-y-4">
+                        <!-- Blog post will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Best Thumbnail Section -->
         <div class="mb-16 reveal">
             <h2 class="text-3xl font-bold text-primary mb-8">📸 Best Thumbnails</h2>
@@ -178,6 +196,41 @@
             <h2 class="text-3xl font-bold text-primary mb-8">💡 Hook Variations</h2>
             <div id="hooksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Hooks will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Twitter Thread -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">🐦 Twitter Thread</h2>
+            <div class="card bg-secondary border-color shadow-custom p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-primary">Ready-to-Post Thread</h3>
+                    <button onclick="copyToClipboard(getThreadText())" class="btn-primary">
+                        📋 Copy Thread
+                    </button>
+                </div>
+                <div id="twitterThread" class="space-y-4">
+                    <!-- Thread tweets will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnail Concepts -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">🎨 Thumbnail Concepts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card bg-secondary border-color shadow-custom p-6">
+                    <h3 class="text-lg font-semibold text-primary mb-4">Design Ideas</h3>
+                    <div id="thumbnailConcepts" class="space-y-3">
+                        <!-- Thumbnail concepts will be inserted here -->
+                    </div>
+                </div>
+                <div class="card bg-secondary border-color shadow-custom p-6">
+                    <h3 class="text-lg font-semibold text-primary mb-4">Text Overlays</h3>
+                    <div id="thumbnailTexts" class="space-y-3">
+                        <!-- Thumbnail text ideas will be inserted here -->
+                    </div>
+                </div>
             </div>
         </div>
 
