@@ -1,41 +1,19 @@
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = "http://127.0.0.1:8000";
 
-async function uploadVideo(file) {
+async function processVideo(file) {
+
     const formData = new FormData();
-    formData.append('file', file);
-    
-    const response = await fetch(`${API_BASE_URL}/upload`, {
-        method: 'POST',
+    formData.append("video", file);
+    formData.append("niche", "general");
+
+    const response = await fetch(`${API_BASE_URL}/process-video`, {
+        method: "POST",
         body: formData
     });
-    
-    if (!response.ok) throw new Error('Upload failed');
-    return await response.json();
-}
 
-async function processVideo(videoId) {
-    const response = await fetch(`${API_BASE_URL}/process/${videoId}`, {
-        method: 'POST'
-    });
-    
-    if (!response.ok) throw new Error('Processing failed');
-    return await response.json();
-}
+    if (!response.ok) {
+        throw new Error("Backend processing failed");
+    }
 
-async function getClips(videoId) {
-    const response = await fetch(`${API_BASE_URL}/clips/${videoId}`);
-    if (!response.ok) throw new Error('Failed to fetch clips');
-    return await response.json();
-}
-
-async function getContent(videoId) {
-    const response = await fetch(`${API_BASE_URL}/content/${videoId}`);
-    if (!response.ok) throw new Error('Failed to fetch content');
-    return await response.json();
-}
-
-async function getResults(jobId) {
-    const response = await fetch(`${API_BASE_URL}/results/${jobId}`);
-    if (!response.ok) throw new Error('Failed to fetch results');
     return await response.json();
 }

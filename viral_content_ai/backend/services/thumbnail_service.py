@@ -1,12 +1,15 @@
 import cv2
 import os
 
+
 def extract_best_frame(video_path: str) -> str:
-    os.makedirs("storage/thumbnails", exist_ok=True)
 
-    output_path = os.path.join("storage", "thumbnails", "thumbnail.jpg")
+    output_dir = os.path.join("storage", "frames")
+    os.makedirs(output_dir, exist_ok=True)
 
-    cap = cv2.VideoCapture("E:\\foresight\\viral_content_ai\\sample_video.mp4")
+    output_path = os.path.join(output_dir, "best_frame.jpg")
+
+    cap = cv2.VideoCapture(video_path)
 
     best_score = 0
     best_frame = None
@@ -29,5 +32,7 @@ def extract_best_frame(video_path: str) -> str:
         raise Exception("No frame extracted")
 
     cv2.imwrite(output_path, best_frame)
+
+    print("✅ Frame extracted:", output_path)
 
     return output_path

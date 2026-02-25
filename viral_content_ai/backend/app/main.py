@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import shutil
 import os
 
@@ -9,17 +10,29 @@ from services.content_generation_service import generate_content
 
 app = FastAPI()
 
-# Enable CORS for frontend
+# -----------------------------
+# CORS (Allow frontend)
+# -----------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # later restrict this
+    allow_origins=["*"],  # later restrict in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# -----------------------------
+# Storage folder
+# -----------------------------
 os.makedirs("storage/videos", exist_ok=True)
 
+# Serve static files
+app.mount("/storage", StaticFiles(directory="storage"), name="storage")
+
+
+# -----------------------------
+# API Endpoint
+# -----------------------------
 @app.post("/process-video")
 async def process_video(
     video: UploadFile = File(...),
@@ -35,7 +48,7 @@ async def process_video(
     content = generate_content(transcript, niche)
 
     return {
-        "thumbnail_path": thumbnail_path,
+        "thumbnail": thumbnail_path,
         "transcript": transcript,
         "hook": content["hook"],
         "caption": content["caption"],
