@@ -33,3 +33,9 @@ async function getContent(videoId) {
     if (!response.ok) throw new Error('Failed to fetch content');
     return await response.json();
 }
+
+async function getResults(jobId) {
+    const response = await fetch(`${API_BASE_URL}/results/${jobId}`);
+    if (!response.ok) throw new Error('Failed to fetch results');
+    return await response.json();
+}

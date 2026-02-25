@@ -3,164 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results - Viral AI</title>
+    <title>Your Content is Ready - Viral AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background: #FFFFFF; }
-        
-        /* Page Transition */
-        .page-content {
-            animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes pageEnter {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .clip-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .clip-card:hover {
-            transform: translateY(-4px);
-        }
-        
-        .content-item {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .content-item:hover {
-            background: #F5F5F7;
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #1D1D1F;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 14px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-        }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="antialiased">
+<body class="antialiased bg-primary">
+    
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <div class="toggle-circle"></div>
+    </div>
     
     <div class="page-content">
     
     <!-- Navigation -->
-    <nav class="border-b border-gray-100">
+    <nav class="border-b border-color bg-secondary">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-xl font-semibold text-[#1D1D1F]">Viral AI</a>
-            <a href="upload.html" class="text-sm text-[#6E6E73] hover:text-[#1D1D1F] transition-colors">
+            <a href="index.html" class="text-xl font-semibold text-primary">Viral AI</a>
+            <a href="upload.html" class="text-sm text-secondary hover:text-primary transition-colors">
                 New Upload
             </a>
         </div>
     </nav>
     
-    <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="max-w-7xl mx-auto px-6 py-12">
         
-        <!-- Header -->
-        <div class="mb-16">
-            <h1 class="text-5xl font-semibold tracking-tight text-[#1D1D1F] mb-3" style="line-height: 1.1; letter-spacing: -0.02em;">
+        <!-- Hero Header -->
+        <div class="mb-16 text-center reveal">
+            <h1 class="text-6xl font-bold text-primary mb-4 hero-text" style="line-height: 1.1; letter-spacing: -0.02em;">
                 Your Content is Ready
             </h1>
-            <p class="text-lg text-[#6E6E73]">
-                12 clips, thumbnails, and optimized content generated
+            <p class="text-xl text-secondary mb-8" id="subtitle">
+                Platform-optimized content generated from your video
             </p>
+            <div class="inline-flex items-center gap-3 bg-secondary px-6 py-3 rounded-full border border-color">
+                <span class="text-sm font-medium text-secondary">Platform:</span>
+                <span class="text-sm font-semibold text-primary" id="platformBadge">Instagram</span>
+            </div>
         </div>
 
-        <!-- Clips Section -->
-        <div class="mb-20">
-            <h2 class="text-2xl font-semibold text-[#1D1D1F] mb-8">Viral Clips</h2>
-            <div id="clipsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Best Thumbnail Section -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">📸 Best Thumbnails</h2>
+            <div id="thumbnailsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Thumbnails will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Viral Clips Section -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">🎬 Viral Clips</h2>
+            <div id="clipsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Clips will be inserted here -->
             </div>
         </div>
 
-        <!-- Content Section -->
-        <div class="bg-[#F5F5F7] rounded-2xl p-12">
-            <h2 class="text-2xl font-semibold text-[#1D1D1F] mb-8">Generated Content</h2>
+        <!-- Platform-Specific Content -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">📱 Platform Content</h2>
             
-            <!-- Tab Navigation -->
-            <div class="bg-white p-1 rounded-full inline-flex mb-10 shadow-sm">
-                <button onclick="switchTab('titles')" 
-                        id="tab-titles"
-                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 bg-[#0066FF] text-white">
-                    Titles
+            <!-- Platform Tabs -->
+            <div class="flex gap-4 mb-8 overflow-x-auto">
+                <button onclick="switchPlatform('instagram')" id="platform-instagram" class="platform-tab active">
+                    <span class="text-2xl mb-2">📸</span>
+                    <span class="text-sm font-medium">Instagram</span>
                 </button>
-                <button onclick="switchTab('descriptions')" 
-                        id="tab-descriptions"
-                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
-                    Descriptions
+                <button onclick="switchPlatform('youtube')" id="platform-youtube" class="platform-tab">
+                    <span class="text-2xl mb-2">▶️</span>
+                    <span class="text-sm font-medium">YouTube</span>
                 </button>
-                <button onclick="switchTab('hashtags')" 
-                        id="tab-hashtags"
-                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
-                    Hashtags
-                </button>
-                <button onclick="switchTab('voiceover')" 
-                        id="tab-voiceover"
-                        class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-[#6E6E73]">
-                    Voiceover
+                <button onclick="switchPlatform('tiktok')" id="platform-tiktok" class="platform-tab">
+                    <span class="text-2xl mb-2">🎵</span>
+                    <span class="text-sm font-medium">TikTok</span>
                 </button>
             </div>
 
-            <!-- Tab Content -->
-            <div id="content-titles" class="tab-content">
-                <div id="titlesContainer" class="space-y-3 max-w-3xl">
-                    <!-- Titles will be inserted here -->
+            <!-- Platform Content Cards -->
+            <div id="platform-content-instagram" class="platform-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Best Clip for Instagram -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">🎥 Best Clip for Instagram</h3>
+                        <div id="instagram-clip" class="aspect-video bg-primary rounded-xl mb-4">
+                            <!-- Video will be inserted here -->
+                        </div>
+                        <button onclick="downloadClip('instagram')" class="btn-primary w-full">
+                            Download for Instagram
+                        </button>
+                    </div>
+
+                    <!-- Caption & Hashtags -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">✍️ Caption & Hashtags</h3>
+                        <div class="space-y-4">
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('p').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Caption:</p>
+                                <p class="text-primary" id="instagram-caption">Loading...</p>
+                            </div>
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('#instagram-hashtags').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Hashtags:</p>
+                                <p class="text-primary" id="instagram-hashtags">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="content-descriptions" class="tab-content hidden">
-                <div id="descriptionsContainer" class="space-y-3 max-w-3xl">
-                    <!-- Descriptions will be inserted here -->
+            <div id="platform-content-youtube" class="platform-content hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Best Clip for YouTube -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">🎥 Best Clip for YouTube</h3>
+                        <div id="youtube-clip" class="aspect-video bg-primary rounded-xl mb-4">
+                            <!-- Video will be inserted here -->
+                        </div>
+                        <button onclick="downloadClip('youtube')" class="btn-primary w-full">
+                            Download for YouTube
+                        </button>
+                    </div>
+
+                    <!-- Title & Description -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">✍️ Title & Description</h3>
+                        <div class="space-y-4">
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('p').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Title:</p>
+                                <p class="text-primary font-semibold" id="youtube-title">Loading...</p>
+                            </div>
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('#youtube-description').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Description:</p>
+                                <p class="text-primary" id="youtube-description">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="content-hashtags" class="tab-content hidden">
-                <div id="hashtagsContainer" class="flex flex-wrap gap-2 max-w-3xl">
+            <div id="platform-content-tiktok" class="platform-content hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Best Clip for TikTok -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">🎥 Best Clip for TikTok</h3>
+                        <div id="tiktok-clip" class="aspect-[9/16] max-w-sm mx-auto bg-primary rounded-xl mb-4">
+                            <!-- Video will be inserted here -->
+                        </div>
+                        <button onclick="downloadClip('tiktok')" class="btn-primary w-full">
+                            Download for TikTok
+                        </button>
+                    </div>
+
+                    <!-- Caption & Hashtags -->
+                    <div class="card bg-secondary border-color shadow-custom p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-4">✍️ Caption & Hashtags</h3>
+                        <div class="space-y-4">
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('p').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Caption:</p>
+                                <p class="text-primary" id="tiktok-caption">Loading...</p>
+                            </div>
+                            <div class="content-item" onclick="copyToClipboard(this.querySelector('#tiktok-hashtags').textContent)">
+                                <p class="text-sm font-medium text-secondary mb-2">Hashtags:</p>
+                                <p class="text-primary" id="tiktok-hashtags">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Hook Variations -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">💡 Hook Variations</h2>
+            <div id="hooksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Hooks will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Full Transcript Section -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">📝 Full Transcript</h2>
+            <div class="card bg-secondary border-color shadow-custom p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-primary">Video Transcript</h3>
+                    <button onclick="copyToClipboard(document.getElementById('transcript-text').textContent)" class="btn-primary">
+                        📋 Copy Transcript
+                    </button>
+                </div>
+                <div class="bg-primary rounded-xl p-6 max-h-96 overflow-y-auto">
+                    <p id="transcript-text" class="text-primary leading-relaxed whitespace-pre-wrap">
+                        Loading transcript...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Captions Section -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">✍️ All Captions & Descriptions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Short Captions -->
+                <div class="card bg-secondary border-color shadow-custom p-6">
+                    <h3 class="text-lg font-semibold text-primary mb-4">Short Captions</h3>
+                    <div id="shortCaptions" class="space-y-3">
+                        <!-- Short captions will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Long Descriptions -->
+                <div class="card bg-secondary border-color shadow-custom p-6">
+                    <h3 class="text-lg font-semibold text-primary mb-4">Long Descriptions</h3>
+                    <div id="longDescriptions" class="space-y-3">
+                        <!-- Long descriptions will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Hashtags Section -->
+        <div class="mb-16 reveal">
+            <h2 class="text-3xl font-bold text-primary mb-8">#️⃣ All Hashtags</h2>
+            <div class="card bg-secondary border-color shadow-custom p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-primary">Optimized Hashtags</h3>
+                    <button onclick="copyToClipboard(document.getElementById('all-hashtags').textContent)" class="btn-primary">
+                        📋 Copy All
+                    </button>
+                </div>
+                <div id="all-hashtags" class="flex flex-wrap gap-3">
                     <!-- Hashtags will be inserted here -->
                 </div>
             </div>
+        </div>
 
-            <div id="content-voiceover" class="tab-content hidden">
-                <div id="voiceoverContainer" class="max-w-3xl">
-                    <!-- Voiceover player will be inserted here -->
-                </div>
-            </div>
+        <!-- Download All Section -->
+        <div class="text-center reveal">
+            <button onclick="downloadAll()" class="btn-primary text-lg px-12 py-4">
+                📦 Download All Content
+            </button>
+            <p class="text-sm text-secondary mt-4">Get all clips, thumbnails, and content in one package</p>
         </div>
 
     </div>
     
     <!-- Toast Notification -->
-    <div id="toast" class="toast">Copied to clipboard</div>
+    <div id="toast" class="toast">Copied to clipboard!</div>
     
     </div>
 
     <script src="js/api.js"></script>
-    <script src="js/results.js"></script>
+    <script src="js/results-new.js"></script>
+    
+    <script>
+        // Theme toggle
+        const toggle = document.getElementById("themeToggle");
+        toggle.addEventListener("click", () => {
+            document.documentElement.classList.toggle("dark");
+            toggle.classList.toggle("active");
+        });
+        
+        // Scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>

@@ -1,29 +1,35 @@
 let selectedFile = null;
 
-document.getElementById('videoFile').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        selectedFile = file;
-        displayFileInfo(file);
-    }
+// File input handling
+const videoFileInput = document.getElementById('videoFile');
+const fileInfo = document.getElementById('fileInfo');
+const fileName = document.getElementById('fileName');
+const fileSize = document.getElementById('fileSize');
+const removeFileBtn = document.getElementById('removeFile');
+const uploadButton = document.getElementById('uploadButton');
+
+videoFileInput.addEventListener('change', (e) => {
+    handleFileSelect(e.target.files[0]);
 });
 
-document.getElementById('removeFile').addEventListener('click', function() {
+removeFileBtn.addEventListener('click', () => {
     selectedFile = null;
-    document.getElementById('videoFile').value = '';
-    document.getElementById('fileInfo').classList.add('hidden');
-    document.getElementById('uploadButton').classList.add('hidden');
+    videoFileInput.value = '';
+    fileInfo.classList.add('hidden');
+    uploadButton.classList.add('hidden');
 });
 
-function displayFileInfo(file) {
-    const fileInfo = document.getElementById('fileInfo');
-    const fileName = document.getElementById('fileName');
-    const fileSize = document.getElementById('fileSize');
-    const uploadButton = document.getElementById('uploadButton');
+function handleFileSelect(file) {
+    if (!file) return;
     
+    if (!file.type.startsWith('video/')) {
+        alert('Please select a video file');
+        return;
+    }
+    
+    selectedFile = file;
     fileName.textContent = file.name;
     fileSize.textContent = formatFileSize(file.size);
-    
     fileInfo.classList.remove('hidden');
     uploadButton.classList.remove('hidden');
 }
@@ -36,61 +42,77 @@ function formatFileSize(bytes) {
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 }
 
+// Upload video function
 async function uploadVideo() {
     if (!selectedFile) return;
-
-    document.getElementById('uploadCard').classList.add('hidden');
-    document.getElementById('processingCard').classList.remove('hidden');
-
+    
     try {
-        updateStep(1, 'active');
-
+        // Hide upload card, show processing
+        document.getElementById('uploadCard').classList.add('hidden');
+        document.getElementById('processingCard').classList.remove('hidden');
+        
+        // Simulate upload progress
+        updateStep('step1', 'active');
+        await sleep(500);
+        updateStep('step1', 'complete');
+        
+        // Upload to backend
+        updateStep('step2', 'active');
         const formData = new FormData();
-        formData.append('video', selectedFile);
-        formData.append('niche', "Fitness motivation"); // you can later make dynamic
-
-        const response = await fetch("http://127.0.0.1:8000/process-video", {
-            method: "POST",
+        formData.append('file', selectedFile);
+        
+        const response = await fetch('http://localhost:8000/upload', {
+            method: 'POST',
             body: formData
         });
-
-        if (!response.ok) throw new Error("Processing failed");
-
-        const result = await response.json();
-
-        updateStep(1, 'complete');
-        updateStep(2, 'complete');
-        updateStep(3, 'complete');
-        updateStep(4, 'complete');
-
-        // Save result in localStorage
-        localStorage.setItem("videoResult", JSON.stringify(result));
-
-        setTimeout(() => {
-            window.location.href = "results.html";
-        }, 500);
-
+        
+        if (!response.ok) {
+            throw new Error('Upload failed');
+        }
+        
+        const data = await response.json();
+        updateStep('step2', 'complete');
+        
+        // Simulate processing steps
+        updateStep('step3', 'active');
+        await sleep(1000);
+        updateStep('step3', 'complete');
+        
+        updateStep('step4', 'active');
+        await sleep(1000);
+        updateStep('step4', 'complete');
+        
+        // Redirect to results page
+        // For now, redirect without job_id to show mock data
+        window.location.href = 'results.html';
+        
     } catch (error) {
-        console.error("Error:", error);
-        alert("Processing failed.");
-        location.reload();
+        console.error('Error:', error);
+        alert('Upload failed. Please make sure the backend is running on http://localhost:8000');
+        document.getElementById('uploadCard').classList.remove('hidden');
+        document.getElementById('processingCard').classList.add('hidden');
     }
-}function updateStep(stepNumber, status) {
-    const step = document.getElementById(`step${stepNumber}`);
-    const circle = step.querySelector('div');
+}
+
+function updateStep(stepId, state) {
+    const step = document.getElementById(stepId);
+    const circle = step.querySelector('.w-6');
     const text = step.querySelector('span');
     
-    if (status === 'active') {
-        step.classList.add('bg-blue-50');
-        circle.classList.remove('border-gray-300');
-        circle.classList.add('border-[#0071E3]', 'border-4');
-        text.classList.remove('text-[#6E6E73]');
-        text.classList.add('text-[#1D1D1F]');
-    } else if (status === 'complete') {
-        step.classList.remove('bg-blue-50');
+    if (state === 'active') {
+        step.style.background = 'rgba(0, 102, 255, 0.05)';
+        circle.style.borderColor = '#0066FF';
+        circle.style.background = '#0066FF';
+        text.style.color = '#1D1D1F';
+    } else if (state === 'complete') {
+        step.style.background = 'rgba(34, 197, 94, 0.05)';
+        circle.style.borderColor = '#22C55E';
+        circle.style.background = '#22C55E';
         circle.innerHTML = '<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>';
-        circle.classList.remove('border-[#0071E3]', 'border-4');
-        circle.classList.add('bg-[#0071E3]', 'flex', 'items-center', 'justify-center');
-        text.classList.add('text-[#6E6E73]');
+        text.style.color = '#22C55E';
     }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
