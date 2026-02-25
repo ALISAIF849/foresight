@@ -38,59 +38,44 @@ function formatFileSize(bytes) {
 
 async function uploadVideo() {
     if (!selectedFile) return;
-    
-    // Hide upload card, show processing
+
     document.getElementById('uploadCard').classList.add('hidden');
     document.getElementById('processingCard').classList.remove('hidden');
-    
+
     try {
-        // Step 1: Upload
         updateStep(1, 'active');
+
         const formData = new FormData();
-        formData.append('file', selectedFile);
-        
-        const uploadResponse = await fetch('http://localhost:8000/upload', {
-            method: 'POST',
+        formData.append('video', selectedFile);
+        formData.append('niche', "Fitness motivation"); // you can later make dynamic
+
+        const response = await fetch("http://127.0.0.1:8000/process-video", {
+            method: "POST",
             body: formData
         });
-        
-        if (!uploadResponse.ok) throw new Error('Upload failed');
-        const uploadResult = await uploadResponse.json();
+
+        if (!response.ok) throw new Error("Processing failed");
+
+        const result = await response.json();
+
         updateStep(1, 'complete');
-        
-        // Step 2: Process
-        updateStep(2, 'active');
-        await new Promise(resolve => setTimeout(resolve, 1000));
         updateStep(2, 'complete');
-        
-        // Step 3: Detect
-        updateStep(3, 'active');
-        const processResponse = await fetch(`http://localhost:8000/process/${uploadResult.video_id}`, {
-            method: 'POST'
-        });
-        
-        if (!processResponse.ok) throw new Error('Processing failed');
-        await processResponse.json();
         updateStep(3, 'complete');
-        
-        // Step 4: Generate
-        updateStep(4, 'active');
-        await new Promise(resolve => setTimeout(resolve, 1000));
         updateStep(4, 'complete');
-        
-        // Redirect to results
+
+        // Save result in localStorage
+        localStorage.setItem("videoResult", JSON.stringify(result));
+
         setTimeout(() => {
-            window.location.href = `results.html?video_id=${uploadResult.video_id}`;
+            window.location.href = "results.html";
         }, 500);
-        
+
     } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred during processing. Please try again.');
+        console.error("Error:", error);
+        alert("Processing failed.");
         location.reload();
     }
-}
-
-function updateStep(stepNumber, status) {
+}function updateStep(stepNumber, status) {
     const step = document.getElementById(`step${stepNumber}`);
     const circle = step.querySelector('div');
     const text = step.querySelector('span');
