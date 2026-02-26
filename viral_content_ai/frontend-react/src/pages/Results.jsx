@@ -6,7 +6,37 @@ export default function Results() {
   const navigate = useNavigate()
   const { projectId } = useParams()
   const [selectedPlatform, setSelectedPlatform] = useState('all')
+  // =============================
+// AI GENERATED RESULT (HARDCODED)
+// =============================
+const aiResult = {
+  thumbnail: "http://127.0.0.1:8000/storage/thumbnails/thumbnail_c7975bff.jpg",
 
+  hook:
+    "The Easiest Way to Give Up vs. The Hardest Thing to Do: Show Up",
+
+  caption:
+    "Consistency is key to success. Giving 100% every day, even when you don't see immediate results.",
+
+  cta:
+    "Take the first step towards your goals today and keep pushing forward. Share with us in the comments what motivates you to get up and grind every day!",
+
+  transcript:
+    "It's easy to give up. You know, easy. It's the easiest thing in the world to do. All right, man, I'm done. I ain't gone. I ain't gonna keep going. Yeah, the best I'm gonna work. The one. Yeah, man. It's very easy. But was hard is going, yo, yesterday I got nothing from working as hard as I could. Nothing happened from that. I'm gonna do the same thing again today, but I'm gonna try to go harder. That's the hardest thing in the world. To get up every day and give 100% and be in the same position that you were each day, but mentally know that you're trying and trying and trying. That's, that's a real, that's a real grind.",
+
+  hashtags: [
+    "#Motivation",
+    "#GrindMode",
+    "#ConsistencyIsKey",
+    "#SuccessMindset",
+    "#DailyMotivation",
+    "#StayFocused",
+    "#HardWorkPaysOff",
+    "#GoalOriented",
+    "#MentalToughness",
+    "#ProductivityHacks"
+  ]
+}
   const platforms = [
     { id: 'all', name: 'All Platforms', icon: '🌐', count: 12 },
     { id: 'instagram', name: 'Instagram', icon: '📸', count: 3, color: 'from-pink-500 to-purple-600' },
@@ -107,7 +137,7 @@ export default function Results() {
               ← Dashboard
             </button>
             <button className="px-6 py-2 rounded-full bg-black text-white font-medium hover:bg-gray-900 transition">
-              Download All
+              
             </button>
           </div>
         </div>
@@ -115,7 +145,82 @@ export default function Results() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
-        
+        {/* ===============================
+   AI GENERATED CONTENT (TOP PRIORITY)
+================================ */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="bg-white rounded-3xl p-8 mb-12 border border-gray-200 shadow-sm"
+>
+
+  <h2 className="text-3xl font-semibold text-gray-900 mb-8">
+    🤖 AI Content Intelligence
+  </h2>
+
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    {/* Thumbnail */}
+    <div>
+      <img
+        src={aiResult.thumbnail}
+        alt="Generated Thumbnail"
+        className="rounded-2xl w-full object-cover border"
+      />
+    </div>
+
+    {/* Text Content */}
+    <div className="space-y-6">
+
+      <div>
+        <h4 className="font-semibold text-gray-900 mb-1">🔥 Hook</h4>
+        <p className="text-gray-700">{aiResult.hook}</p>
+      </div>
+
+      <div>
+        <h4 className="font-semibold text-gray-900 mb-1">✍️ Caption</h4>
+        <p className="text-gray-700">{aiResult.caption}</p>
+      </div>
+
+      <div>
+        <h4 className="font-semibold text-gray-900 mb-1">📢 Call To Action</h4>
+        <p className="text-gray-700">{aiResult.cta}</p>
+      </div>
+
+    </div>
+  </div>
+
+  {/* Transcript */}
+  <div className="mt-8">
+    <h4 className="font-semibold text-gray-900 mb-2">
+      🧠 Full Transcript
+    </h4>
+
+    <div className="bg-gray-50 rounded-xl p-4 max-h-48 overflow-y-auto text-gray-700 text-sm leading-relaxed">
+      {aiResult.transcript}
+    </div>
+  </div>
+
+  {/* Hashtags */}
+  <div className="mt-6">
+    <h4 className="font-semibold text-gray-900 mb-3">
+      #️⃣ Suggested Hashtags
+    </h4>
+
+    <div className="flex flex-wrap gap-2">
+      {aiResult.hashtags.map((tag, idx) => (
+        <span
+          key={idx}
+          className="px-4 py-2 rounded-full bg-black text-white text-sm font-medium"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+
+</motion.div>
         {/* Success Banner with Engagement Prediction */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -142,178 +247,109 @@ export default function Results() {
 
         {/* Virality Heatmap */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl p-8 mb-12 border border-gray-200"
-        >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">Real-Time Virality Heatmap</h3>
-          <div className="grid grid-cols-6 gap-3">
-            {[
-              { time: '0-10s', score: 92, label: 'Hook', color: 'bg-gray-900' },
-              { time: '10-20s', score: 88, label: 'Peak', color: 'bg-gray-800' },
-              { time: '20-30s', score: 95, label: 'Viral', color: 'bg-gray-900' },
-              { time: '30-40s', score: 78, label: 'Hold', color: 'bg-gray-700' },
-              { time: '40-50s', score: 65, label: 'Drop', color: 'bg-gray-600' },
-              { time: '50-60s', score: 82, label: 'CTA', color: 'bg-gray-800' },
-            ].map((segment, idx) => (
-              <div key={idx} className="text-center">
-                <div className={`${segment.color} rounded-xl p-6 mb-3 text-white relative overflow-hidden`}>
-                  <div className="text-3xl font-bold mb-1">{segment.score}</div>
-                  <div className="text-xs opacity-80">{segment.label}</div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-                <div className="text-xs text-gray-600 font-medium">{segment.time}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="bg-white rounded-2xl p-8 mb-12 border border-gray-200"
+>
+  <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+    Real-Time Virality Heatmap
+  </h3>
 
-        {/* Regional Language Insights */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white rounded-2xl p-8 mb-12 border border-gray-200"
-        >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">Regional Language Dominance (India-First)</h3>
-          <div className="space-y-4">
-            {[
-              { lang: 'Hindi', reach: '45%', engagement: '52%', flag: '🇮🇳' },
-              { lang: 'English', reach: '30%', engagement: '28%', flag: '🌐' },
-              { lang: 'Tamil', reach: '12%', engagement: '15%', flag: '🇮🇳' },
-              { lang: 'Telugu', reach: '8%', engagement: '10%', flag: '🇮🇳' },
-              { lang: 'Bengali', reach: '5%', engagement: '7%', flag: '🇮🇳' },
-            ].map((lang, idx) => (
-              <div key={idx} className="flex items-center gap-4">
-                <div className="text-2xl">{lang.flag}</div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-gray-900">{lang.lang}</span>
-                    <div className="flex gap-4 text-sm">
-                      <span className="text-gray-600">Reach: <span className="font-semibold text-gray-900">{lang.reach}</span></span>
-                      <span className="text-gray-600">Engagement: <span className="font-semibold text-gray-900">{lang.engagement}</span></span>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
-                      <div className="bg-gray-900 h-full rounded-full" style={{ width: lang.reach }} />
-                    </div>
-                    <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
-                      <div className="bg-gray-700 h-full rounded-full" style={{ width: lang.engagement }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+  <div className="grid grid-cols-6 gap-3">
+    {[
+      { time: '0-6s', score: 95, label: 'Hook', color: 'bg-gray-900' },
 
-        {/* Platform Tabs */}
-        <div className="flex items-center gap-3 mb-8 overflow-x-auto pb-4">
-          {platforms.map((platform) => (
-            <motion.button
-              key={platform.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setSelectedPlatform(platform.id)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-full font-medium transition-all whitespace-nowrap ${
-                selectedPlatform === platform.id
-                  ? 'bg-black text-white shadow-lg'
-                  : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <span className="text-xl">{platform.icon}</span>
-              <span>{platform.name}</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs ${
-                selectedPlatform === platform.id
-                  ? 'bg-white/20'
-                  : 'bg-gray-100'
-              }`}>
-                {platform.count}
-              </span>
-            </motion.button>
-          ))}
+      { time: '6-14s', score: 88, label: 'Relatable', color: 'bg-gray-800' },
+
+      { time: '14-22s', score: 84, label: 'Struggle', color: 'bg-gray-700' },
+
+      { time: '22-30s', score: 91, label: 'Turning Point', color: 'bg-gray-900' },
+
+      { time: '30-37s', score: 93, label: 'Insight', color: 'bg-gray-800' },
+
+      { time: '37-43s', score: 89, label: 'Motivation', color: 'bg-gray-700' },
+    ].map((segment, idx) => (
+      <div key={idx} className="text-center">
+
+        <div
+          className={`${segment.color} rounded-xl p-6 mb-3 text-white relative overflow-hidden`}
+        >
+          <div className="text-3xl font-bold mb-1">
+            {segment.score}
+          </div>
+
+          <div className="text-xs opacity-80">
+            {segment.label}
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </div>
 
-        {/* Assets Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAssets.map((asset, idx) => (
-            <motion.div
-              key={asset.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 group"
-            >
-              {/* Thumbnail */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={asset.thumbnail} 
-                  alt={`${asset.platform} ${asset.type}`}
-                  className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
-                />
-                {/* Duration Badge */}
-                <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-white text-xs font-medium">
-                  {asset.duration}
-                </div>
-                {/* Platform Badge */}
-                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-medium flex items-center gap-1">
-                  <span>{platforms.find(p => p.id === asset.platform)?.icon}</span>
-                  <span className="capitalize">{asset.platform}</span>
-                </div>
-                {/* Engagement Score Badge */}
-                <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-gray-900/90 backdrop-blur-sm text-white text-xs font-bold">
-                  {asset.engagement}% Engagement
-                </div>
-                {/* Virality Score Badge */}
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold">
-                  🔥 {asset.virality}
-                </div>
-              </div>
-
-              {/* Asset Info */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {asset.type}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      Optimized for {platforms.find(p => p.id === asset.platform)?.name}
-                    </p>
-                  </div>
-                  <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
-                    ✓ Ready
-                  </span>
-                </div>
-
-                {/* Platform-Specific Optimizations */}
-                <div className="mb-4">
-                  <div className="text-xs text-gray-600 mb-2 font-medium">Optimizations:</div>
-                  <div className="flex flex-wrap gap-2">
-                    {asset.optimizations.map((opt, i) => (
-                      <span key={i} className="px-2 py-1 rounded-md bg-gray-100 text-gray-700 text-xs font-medium">
-                        {opt}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex gap-2">
-                  <button className="flex-1 px-4 py-2 rounded-xl bg-black text-white font-medium hover:bg-gray-900 transition">
-                    Download
-                  </button>
-                  <button className="px-4 py-2 rounded-xl border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition">
-                    Preview
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="text-xs text-gray-600 font-medium">
+          {segment.time}
         </div>
 
+      </div>
+    ))}
+  </div>
+</motion.div>
+        {/* AI Dubbing Powered by ElevenLabs */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+  className="bg-white rounded-2xl p-8 mb-12 border border-gray-200"
+>
+
+  <div className="flex items-center justify-between mb-6">
+    <h3 className="text-2xl font-semibold text-gray-900">
+      🌍 AI Video Dubbing
+    </h3>
+
+    <span className="px-4 py-2 rounded-full bg-black text-white text-sm font-medium">
+      Powered by ElevenLabs 🎙️
+    </span>
+  </div>
+
+  <p className="text-gray-600 mb-8">
+    Your video has been automatically dubbed into multiple global languages
+    using AI voice synthesis technology from our sponsor ElevenLabs.
+  </p>
+
+  {/* Dubbed Videos */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    {/* Hindi Version */}
+    <div className="bg-gray-50 rounded-xl p-4">
+      <h4 className="font-semibold text-gray-900 mb-3">
+        🇮🇳 Hindi Dub
+      </h4>
+
+      <video
+        controls
+        className="rounded-xl w-full"
+        src="http://127.0.0.1:8000/storage/dubbed/hindi.mp4"
+      />
+    </div>
+
+    {/* French Version */}
+    <div className="bg-gray-50 rounded-xl p-4">
+      <h4 className="font-semibold text-gray-900 mb-3">
+        🇫🇷 French Dub
+      </h4>
+
+      <video
+        controls
+        className="rounded-xl w-full"
+        src="http://127.0.0.1:8000/storage/dubbed/french.mp4"
+      />
+    </div>
+
+  </div>
+
+</motion.div>
+       
         {/* Additional Content */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Captions */}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+
 import ThemeToggle from './components/ThemeToggle'
 import OpeningAnimation from './components/OpeningAnimation'
 import LandingPage from './pages/LandingPage'
@@ -8,13 +9,16 @@ import Upload from './pages/Upload'
 import Results from './pages/Results'
 
 function App() {
+
   const [showContent, setShowContent] = useState(false)
   const [theme, setTheme] = useState('light')
 
+  // ==============================
+  // LOAD THEME FROM LOCAL STORAGE
+  // ==============================
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light'
     setTheme(savedTheme)
-    document.documentElement.className = savedTheme
 
     const timer = setTimeout(() => {
       setShowContent(true)
@@ -23,19 +27,45 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
 
+  // ==============================
+  // GLOBAL THEME SYNC (🔥 IMPORTANT)
+  // ==============================
+  useEffect(() => {
+
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+    localStorage.setItem('theme', theme)
+
+  }, [theme])
+
+  // ==============================
+  // THEME CHANGE HANDLER
+  // ==============================
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme)
-    document.documentElement.className = newTheme
-    localStorage.setItem('theme', newTheme)
   }
 
   return (
     <Router>
-      <ThemeToggle currentTheme={theme} onThemeChange={handleThemeChange} />
+
+      {/* Theme Toggle */}
+      <ThemeToggle
+        currentTheme={theme}
+        onThemeChange={handleThemeChange}
+      />
+
+      {/* Opening Animation */}
       <OpeningAnimation show={!showContent} />
-      
-      <div 
-        className={`transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}
+
+      {/* App Pages */}
+      <div
+        className={`transition-opacity duration-1000 ${
+          showContent ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -45,6 +75,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+
     </Router>
   )
 }
